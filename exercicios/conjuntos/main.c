@@ -5,31 +5,24 @@
 #include "conjuntos.h"
 
 int main() {
-    conjunto A;
+    conjunto idades;
 
-    inicializar(A);
-    imprimir(A);
+    inicializar(idades);
+    imprimir(idades);
 
-    inserir(1, A);
-    inserir(2, A);
-    inserir(3, A);
-    inserir(4, A);
-    inserir(5, A);
-    inserir(6, A);
-    inserir(7, A);
-    inserir(8, A);
-    inserir(9, A);
-    inserir(10, A);
-    inserir(11, A);
+    inserir(19, idades);
+    imprimir(idades);
+    inserir(27, idades);
+    imprimir(idades);
 
-    imprimir(A);
-
-    remover(4, A);
-    imprimir(A);
-
-    inserir(11, A);
-    imprimir(A);
-    
+    remover(20, idades);
+    inserir(13, idades);
+    imprimir(idades);
+    inserir(201, idades);
+    imprimir(idades);
+    inserir(0, idades);
+    inserir(-1, idades);
+    imprimir(idades);
     
     return 0;
 }
