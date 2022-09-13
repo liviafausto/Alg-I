@@ -1,7 +1,7 @@
 #ifndef CONJUNTOS_H
 
     #define CONJUNTOS_H
-        #define max 200
+        #define max 100
 
         #define SEM_ERRO 0
         #define JA_EXISTE 1

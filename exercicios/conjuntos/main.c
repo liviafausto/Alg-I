@@ -6,22 +6,17 @@
 
 int main() {
     conjunto idades;
+    int v[10];
 
     inicializar(idades);
-    imprimir(idades);
 
-    inserir(19, idades);
-    imprimir(idades);
-    inserir(27, idades);
-    imprimir(idades);
+    printf("Digite 10 idades diferentes.\n");
+    for(int i=0; i<10; i++){
+        scanf("%d", &v[i]);
 
-    remover(20, idades);
-    inserir(13, idades);
-    imprimir(idades);
-    inserir(201, idades);
-    imprimir(idades);
-    inserir(0, idades);
-    inserir(-1, idades);
+        inserir(v[i], idades);
+    }
+
     imprimir(idades);
     
     return 0;
