@@ -3,6 +3,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int ler_quantidade(){
+    int Q;
+    printf("Insira a quantidade de vetores que serao lidos.\n");
+    scanf("%d", &Q);
+    
+    return Q;
+}
+
 void inicializar_vetores(vetor v1[], vetor v2[], int Q){
 
     for(int i = 0; i < Q; i++) {

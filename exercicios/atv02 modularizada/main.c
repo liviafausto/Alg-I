@@ -5,12 +5,9 @@
 
 int main() {
     int Q;
+    Q = ler_quantidade();
+    vetor v_insertion[Q]; vetor v_merge[Q]; 
 
-    printf("Insira a quantidade de vetores que serao lidos.\n");
-    scanf("%d", &Q);
-
-    vetor v_insertion[Q]; vetor v_merge[Q];
-    
     inicializar_vetores(v_insertion, v_merge, Q);
     ler_elementos(v_insertion, v_merge, Q);
 
