@@ -9,7 +9,7 @@ int main() {
     produto novo; chave codigo_produto; int opcao=0;
 
     do {
-        printf("Digite:\n1- Adicionar novo produto.\n2- Pesquisar produto.\n3- Alterar produto.\n4- Remover produto.\n5 - Sair");
+        printf("Digite:\n1- Adicionar novo produto.\n2- Pesquisar produto.\n3- Alterar produto.\n4- Remover produto.\n5 - Sair\n");
         scanf("%d", &opcao);
 
         switch (opcao){
@@ -18,7 +18,7 @@ int main() {
 
             novo = ler_produto();
             if(inserir(&ouro, novo) == SUCESSO)
-                printf("O produto %s foi inserido com sucesso.\n", novo.nome);
+                printf("O produto %s foi inserido com sucesso.\n\n", novo.nome);
 
             break;
         
@@ -35,7 +35,7 @@ int main() {
             printf("Alterar produto\n\n");
 
             codigo_produto = ler_codigo();
-
+            alterar(&ouro, codigo_produto);
             break;
 
         case 4:
@@ -45,6 +45,9 @@ int main() {
             if (remover(&ouro, codigo_produto) == SUCESSO)
                 printf("Produto removido com sucesso.\n");
 
+            break;
+        
+        case 5:
             break;
         
         default:

@@ -22,18 +22,21 @@
             marcador ultimo;
         } lista;
 
+        //produtos.c
         int criar(lista *l);
         int vazia(lista *l);
         int cheia(lista *l);
-
         int inserir(lista *l, produto novo_produto);
         int remover(lista *l, chave codigo_produto);
         produto pesquisar(lista *l, chave codigo_produto);
         int alterar(lista *l, chave codigo_antigo);
 
-        void imprimir_lista(lista *l);
-        void imprimir_produto(produto pesquisado);
+        //menu.c
         produto ler_produto();
         chave ler_codigo();
+        void imprimir_lista(lista *l);
+        void imprimir_produto(produto pesquisado);
+        produto escolher(produto antigo);
+        produto copy(produto antigo, produto modificado, int escolha);
 
 #endif
