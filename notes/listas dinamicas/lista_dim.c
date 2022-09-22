@@ -20,6 +20,16 @@ int cheia(lista *lista){
 
 }
 
+elemento ler_novo_item(lista *lista, elemento novo_item){
+    
+    printf("\nInsira os dados do novo item que deseja inserir.\n\n");
+    printf("CODIGO: "); scanf("%d", &novo_item.codigo);
+    printf("NOME: "); scanf("%s", novo_item.nome);
+
+    return novo_item;
+
+}
+
 int inserir(lista *lista, elemento novo_item){
 
     apontador novo = (apontador) malloc (sizeof(no));
@@ -48,3 +58,8 @@ int remover(lista *lista, chave chave);
 elemento pesquisar(lista *lista, chave chave);
 int alterar(lista *lista, elemento novo_elemento);
 void imprimir(lista *lista);
+
+void imprimir_elemento(elemento item){
+    printf("\nCODIGO: %d\n", item.codigo);
+    printf("NOME: %s\n", item.nome);
+}

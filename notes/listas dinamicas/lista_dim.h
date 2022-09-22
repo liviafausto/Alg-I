@@ -33,4 +33,7 @@
         int cheia(lista *lista);
         void imprimir(lista *lista);
 
+        elemento ler_novo_item(lista *lista, elemento novo_item);
+        void imprimir_elemento(elemento item);
+
 #endif
