@@ -50,7 +50,7 @@ int inserir(lista *lista, elemento novo_item){
         lista->ultimo = novo;
     }
 
-    printf("O elemento %s de chave %d foi inserido com sucesso.", novo->item.nome, novo->item.nome);
+    printf("O elemento %s de chave %d foi inserido na lista.\n", novo->item.nome, novo->item.codigo);
     return SUCESSO;
 }
 

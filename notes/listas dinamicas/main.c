@@ -6,6 +6,11 @@
 int main() {
     lista minhas_series; elemento nova_serie;
 
+    criar(&minhas_series);
+
     nova_serie = ler_novo_item(&minhas_series, nova_serie);
-    imprimir_elemento(nova_serie);
+
+    if (inserir(&minhas_series, nova_serie)) {
+        printf("SUCESSO!\n");
+    }
 }
