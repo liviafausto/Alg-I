@@ -16,21 +16,9 @@ int vazia(lista *lista){
         return 0;
 }
 
-int cheia(lista *lista){
-
-}
-
-elemento ler_novo_item(lista *lista, elemento novo_item){
-    
-    printf("\nInsira os dados do novo item que deseja inserir.\n\n");
-    printf("CODIGO: "); scanf("%d", &novo_item.codigo);
-    printf("NOME: "); scanf("%s", novo_item.nome);
-
-    return novo_item;
-
-}
-
 int inserir(lista *lista, elemento novo_item){
+
+    //inserir elemento que ja existe?
 
     apontador novo = (apontador) malloc (sizeof(no));
     if(novo == NULL){
@@ -50,16 +38,74 @@ int inserir(lista *lista, elemento novo_item){
         lista->ultimo = novo;
     }
 
-    printf("O elemento %s de chave %d foi inserido na lista.\n", novo->item.nome, novo->item.codigo);
     return SUCESSO;
 }
 
-int remover(lista *lista, chave chave);
-elemento pesquisar(lista *lista, chave chave);
+int remover(lista *lista, chave codigo_item){
+
+    //apontador remover;
+    
+}
+
+int pesquisar(lista *lista, elemento pesquisar_item){
+
+    apontador pesquisar = pesquisa_posicao(lista, pesquisar_item.codigo);
+
+    if (vazia(lista)){
+        printf("Lista vazia.\n");
+        return ERRO_VAZIA;
+    }
+
+    if(pesquisar == NULL){
+        printf("O item pesquisado nao existe.\n");
+        return NAO_ENCONTROU;
+    }
+
+    printf("Item encontrado.\n");
+    pesquisar_item = pesquisar->item;
+    return SUCESSO;
+
+}
+
 int alterar(lista *lista, elemento novo_elemento);
+
 void imprimir(lista *lista);
 
 void imprimir_elemento(elemento item){
     printf("\nCODIGO: %d\n", item.codigo);
     printf("NOME: %s\n", item.nome);
+}
+
+apontador pesquisa_posicao(lista *lista, chave codigo_item){
+
+    apontador pesquisa_pos = lista->head;
+
+    while (pesquisa_pos != NULL){
+
+        if(pesquisa_pos->item.codigo == codigo_item){
+            return pesquisa_pos;
+        }
+        else {
+            pesquisa_pos = pesquisa_pos->proximo;
+        }
+    }
+
+    return NULL;
+}
+
+elemento ler_novo_item(lista *lista, elemento novo_item){
+    
+    printf("\nInsira os dados do novo item que deseja inserir.\n\n");
+    printf("CODIGO: "); scanf("%d", &novo_item.codigo);
+    printf("NOME: "); scanf("%s", novo_item.nome);
+
+    return novo_item;
+
+}
+
+chave ler_chave(chave codigo_item){
+
+    printf("\nDigite o codigo do produto: "); scanf("%d", &codigo_item);
+
+    return codigo_item;
 }
