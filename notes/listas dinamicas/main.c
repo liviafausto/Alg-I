@@ -28,7 +28,16 @@ int main() {
                 serie.codigo = ler_chave(serie.codigo);
 
                 if(pesquisar(&minhas_series, serie) == SUCESSO){
-                    imprimir_elemento(serie);
+                    printf("Item encontrado.\n");
+                }
+                break;
+            
+            case 3: //remover
+                printf("REMOVER ITEM DA LISTA\n");
+                serie.codigo = ler_chave(serie.codigo);
+                
+                if(remover(&minhas_series, serie.codigo) == SUCESSO){
+                    imprimir(&minhas_series);
                 }
                 break;
             

@@ -18,7 +18,10 @@ int vazia(lista *lista){
 
 int inserir(lista *lista, elemento novo_item){
 
-    //inserir elemento que ja existe?
+    if(pesquisar (lista, novo_item) == SUCESSO){
+        printf("Esse item ja esta na lista.\n");
+        return JA_EXISTE;
+    }
 
     apontador novo = (apontador) malloc (sizeof(no));
     if(novo == NULL){
@@ -43,33 +46,82 @@ int inserir(lista *lista, elemento novo_item){
 
 int remover(lista *lista, chave codigo_item){
 
-    //apontador remover;
-    
+    if(vazia(lista)){
+        printf("Lista vazia.\n");
+        return ERRO_VAZIA;
+    }
+
+    apontador remover_no = pesquisa_posicao(lista, codigo_item);
+
+    if(remover_no == NULL){
+        printf("Esse item nao existe.\n");
+        return NAO_ENCONTROU;
+    }
+
+    if(remover_no == lista->head && remover_no == lista->ultimo){
+       criar(lista);
+       free(remover_no);
+       printf("O unico elemento da lista foi removido.\n");
+       return SUCESSO;
+    }
+
+    if(remover_no == lista->head){
+        lista->head = lista->head->proximo;
+        free(remover_no);
+        printf("O primeiro elemento da lista foi removido.\n");
+        return SUCESSO;
+    }
+
+    apontador no_anterior = lista->head;
+
+    while(no_anterior != NULL && no_anterior != remover_no){
+        no_anterior = no_anterior->proximo;
+    }
+
+    no_anterior->proximo = remover_no->proximo;
+
+    if(remover_no == lista->ultimo){
+        lista->ultimo = no_anterior;
+        printf("O ultimo elemento da lista foi removido.\n");
+    }
+
+    free(remover_no);
+    return SUCESSO;
+     
 }
 
 int pesquisar(lista *lista, elemento pesquisar_item){
-
-    apontador pesquisar = pesquisa_posicao(lista, pesquisar_item.codigo);
 
     if (vazia(lista)){
         printf("Lista vazia.\n");
         return ERRO_VAZIA;
     }
 
+    apontador pesquisar = pesquisa_posicao(lista, pesquisar_item.codigo);
+
     if(pesquisar == NULL){
         printf("O item pesquisado nao existe.\n");
         return NAO_ENCONTROU;
     }
 
-    printf("Item encontrado.\n");
     pesquisar_item = pesquisar->item;
+    imprimir_elemento(pesquisar_item);
     return SUCESSO;
 
 }
 
 int alterar(lista *lista, elemento novo_elemento);
 
-void imprimir(lista *lista);
+void imprimir(lista *lista){
+    printf("\nLISTA:\n");
+
+    apontador percorre_lista = lista->head;
+
+    while(percorre_lista != NULL){
+        printf("[ %d ] - %s\n", percorre_lista->item.codigo, percorre_lista->item.nome);
+        percorre_lista = percorre_lista->proximo;
+    }
+}
 
 void imprimir_elemento(elemento item){
     printf("\nCODIGO: %d\n", item.codigo);
@@ -115,6 +167,7 @@ int menu(int opcao) {
 
     printf("1 - Inserir novo item na lista.\n");
     printf("2 - Pesquisar item da lista.\n");
+    printf("3 - Remover item da lista.\n");
     printf("5 - Sair.\n\n");
 
     scanf("%d", &opcao);
