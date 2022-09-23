@@ -37,7 +37,8 @@
         void imprimir_elemento(elemento item);
 
         apontador pesquisa_posicao(lista *lista, chave codigo_item);
-        elemento ler_novo_item(lista *lista, elemento novo_item);
+        elemento ler_novo_item(elemento novo_item);
         chave ler_chave(chave codigo_item);
+        int menu(int opcao);
 
 #endif

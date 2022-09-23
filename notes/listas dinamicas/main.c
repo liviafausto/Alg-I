@@ -5,25 +5,41 @@
 
 int main() {
 
-    lista minhas_series; elemento serie; chave codigo_serie;
-
+    lista minhas_series; elemento serie;
     criar(&minhas_series);
 
-    serie = ler_novo_item(&minhas_series, serie);
+    int opcao=0;
 
-    if (inserir(&minhas_series, serie) == SUCESSO) {
-        printf("O novo item foi inserido na lista com sucesso.\n");
+    while(opcao != 5){
+        opcao = menu(opcao);
+
+        switch (opcao){
+            case 1: //inserir
+                printf("INSERIR NOVO ITEM NA LISTA\n");
+                serie = ler_novo_item(serie);
+
+                if (inserir(&minhas_series, serie) == SUCESSO) {
+                    printf("O novo item foi inserido na lista com sucesso.\n");
+                }
+                break;
+
+            case 2: //pesquisar
+                printf("PESQUISAR ITEM DA LISTA\n");
+                serie.codigo = ler_chave(serie.codigo);
+
+                if(pesquisar(&minhas_series, serie) == SUCESSO){
+                    imprimir_elemento(serie);
+                }
+                break;
+            
+            default:
+                if(opcao != 5){
+                    printf("Opcao invalida, tente novamente.\n\n");
+                }
+                break;
+        }
+
     }
-
-    codigo_serie = ler_chave(codigo_serie);
-    serie.codigo = codigo_serie;
-
-    if(pesquisar(&minhas_series, serie) == SUCESSO){
-        imprimir_elemento(serie);
-    }
-    
-
-    //codigo_serie = ler_chave(codigo_serie);
 
     return 0;
 }

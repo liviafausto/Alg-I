@@ -93,7 +93,7 @@ apontador pesquisa_posicao(lista *lista, chave codigo_item){
     return NULL;
 }
 
-elemento ler_novo_item(lista *lista, elemento novo_item){
+elemento ler_novo_item(elemento novo_item){
     
     printf("\nInsira os dados do novo item que deseja inserir.\n\n");
     printf("CODIGO: "); scanf("%d", &novo_item.codigo);
@@ -105,7 +105,18 @@ elemento ler_novo_item(lista *lista, elemento novo_item){
 
 chave ler_chave(chave codigo_item){
 
-    printf("\nDigite o codigo do produto: "); scanf("%d", &codigo_item);
+    printf("\nDigite o codigo do item: "); scanf("%d", &codigo_item);
 
     return codigo_item;
+}
+
+int menu(int opcao) {
+    printf("\nO que deseja fazer?\n\n");
+
+    printf("1 - Inserir novo item na lista.\n");
+    printf("2 - Pesquisar item da lista.\n");
+    printf("5 - Sair.\n\n");
+
+    scanf("%d", &opcao);
+    return opcao;
 }
