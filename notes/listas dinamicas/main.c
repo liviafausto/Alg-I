@@ -27,8 +27,8 @@ int main() {
                 printf("PESQUISAR ITEM DA LISTA\n");
                 serie.codigo = ler_chave(serie.codigo);
 
-                if(pesquisar(&minhas_series, serie) == SUCESSO){
-                    printf("Item encontrado.\n");
+                if(pesquisar(&minhas_series, &serie) == SUCESSO){
+                    imprimir_elemento(serie);
                 }
                 break;
             

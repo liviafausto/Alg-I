@@ -29,7 +29,7 @@
         int vazia(lista *lista);
         int inserir(lista *lista, elemento item);
         int remover(lista *lista, chave codigo_item);
-        int pesquisar(lista *lista, elemento pesquisar_item);
+        int pesquisar(lista *lista, elemento *pesquisar_item);
         int alterar(lista *lista, elemento novo_elemento);
         int cheia(lista *lista);
 

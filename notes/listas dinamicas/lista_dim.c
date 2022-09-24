@@ -18,7 +18,7 @@ int vazia(lista *lista){
 
 int inserir(lista *lista, elemento novo_item){
 
-    if(pesquisar (lista, novo_item) == SUCESSO){
+    if(pesquisar (lista, &novo_item) == SUCESSO){
         printf("Esse item ja esta na lista.\n");
         return JA_EXISTE;
     }
@@ -91,20 +91,20 @@ int remover(lista *lista, chave codigo_item){
      
 }
 
-int pesquisar(lista *lista, elemento pesquisar_item){
+int pesquisar(lista *lista, elemento *pesquisar_item){
 
     if (vazia(lista)){
         return ERRO_VAZIA;
     }
 
-    apontador pesquisar = pesquisa_posicao(lista, pesquisar_item.codigo);
+    apontador pesquisar = pesquisa_posicao(lista, pesquisar_item->codigo);
 
     if(pesquisar == NULL){
         return NAO_ENCONTROU;
     }
 
-    pesquisar_item = pesquisar->item;
-    imprimir_elemento(pesquisar_item);
+    pesquisar_item->codigo = pesquisar->item.codigo;
+    strcpy(pesquisar_item->nome, pesquisar->item.nome);
     return SUCESSO;
 
 }
