@@ -10,7 +10,7 @@ int main() {
 
     int opcao=0;
 
-    while(opcao != 5){
+    while(opcao != 6){
         opcao = menu(opcao);
 
         switch (opcao){
@@ -40,9 +40,13 @@ int main() {
                     imprimir(&minhas_series);
                 }
                 break;
+
+            case 5: //imprimir lista
+                imprimir(&minhas_series);
+                break;
             
             default:
-                if(opcao != 5){
+                if(opcao != 6){
                     printf("Opcao invalida, tente novamente.\n\n");
                 }
                 break;

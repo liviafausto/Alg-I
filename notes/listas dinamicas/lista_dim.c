@@ -59,10 +59,10 @@ int remover(lista *lista, chave codigo_item){
     }
 
     if(remover_no == lista->head && remover_no == lista->ultimo){
-       criar(lista);
-       free(remover_no);
-       printf("O unico elemento da lista foi removido.\n");
-       return SUCESSO;
+        criar(lista);
+        free(remover_no);
+        printf("O unico elemento da lista foi removido.\n");
+        return SUCESSO;
     }
 
     if(remover_no == lista->head){
@@ -74,7 +74,8 @@ int remover(lista *lista, chave codigo_item){
 
     apontador no_anterior = lista->head;
 
-    while(no_anterior != NULL && no_anterior != remover_no){
+    while(no_anterior->proximo != NULL && no_anterior->proximo != remover_no){
+        
         no_anterior = no_anterior->proximo;
     }
 
@@ -93,14 +94,12 @@ int remover(lista *lista, chave codigo_item){
 int pesquisar(lista *lista, elemento pesquisar_item){
 
     if (vazia(lista)){
-        printf("Lista vazia.\n");
         return ERRO_VAZIA;
     }
 
     apontador pesquisar = pesquisa_posicao(lista, pesquisar_item.codigo);
 
     if(pesquisar == NULL){
-        printf("O item pesquisado nao existe.\n");
         return NAO_ENCONTROU;
     }
 
@@ -110,16 +109,22 @@ int pesquisar(lista *lista, elemento pesquisar_item){
 
 }
 
-int alterar(lista *lista, elemento novo_elemento);
+//int alterar(lista *lista, elemento novo_elemento);
 
 void imprimir(lista *lista){
-    printf("\nLISTA:\n");
 
-    apontador percorre_lista = lista->head;
+    if(vazia(lista)){
+        printf("\nLISTA VAZIA.\n");
 
-    while(percorre_lista != NULL){
-        printf("[ %d ] - %s\n", percorre_lista->item.codigo, percorre_lista->item.nome);
-        percorre_lista = percorre_lista->proximo;
+    } else {
+        printf("\nLISTA:\n");
+
+        apontador percorre_lista = lista->head;
+
+        while(percorre_lista != NULL){
+            printf("[ %d ] - %s\n", percorre_lista->item.codigo, percorre_lista->item.nome);
+            percorre_lista = percorre_lista->proximo;
+        }
     }
 }
 
@@ -168,7 +173,9 @@ int menu(int opcao) {
     printf("1 - Inserir novo item na lista.\n");
     printf("2 - Pesquisar item da lista.\n");
     printf("3 - Remover item da lista.\n");
-    printf("5 - Sair.\n\n");
+    //printf("4 - Alterar item da lista.\n");
+    printf("5 - Imprimir lista.\n");
+    printf("6 - Sair.\n\n");
 
     scanf("%d", &opcao);
     return opcao;
