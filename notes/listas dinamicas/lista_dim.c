@@ -128,8 +128,24 @@ int alterar(lista *lista, elemento alterar_item){
 
     alterar_no->item.codigo = alterar_item.codigo;
     strcpy(alterar_no->item.nome, alterar_item.nome);
-    
+
+    imprimir_elemento(alterar_no->item);
     return SUCESSO;
+
+}
+
+void liberar_lista(lista *lista){
+    if(vazia(lista)){
+        return;
+    }
+    apontador liberar_no = lista->head;
+
+    while(liberar_no != NULL){
+
+        lista->head = lista->head->proximo;
+        free(liberar_no);
+        liberar_no = lista->head;
+    }
 
 }
 
@@ -150,28 +166,6 @@ void imprimir(lista *lista){
     }
 }
 
-void imprimir_elemento(elemento item){
-    printf("\nCODIGO: %d\n", item.codigo);
-    printf("NOME: %s\n", item.nome);
-}
-
-apontador pesquisa_posicao(lista *lista, chave codigo_item){
-
-    apontador pesquisa_pos = lista->head;
-
-    while (pesquisa_pos != NULL){
-
-        if(pesquisa_pos->item.codigo == codigo_item){
-            return pesquisa_pos;
-        }
-        else {
-            pesquisa_pos = pesquisa_pos->proximo;
-        }
-    }
-
-    return NULL;
-}
-
 elemento ler_novo_item(elemento novo_item){
     
     printf("\nInsira os dados do novo item que deseja inserir.\n\n");
@@ -189,7 +183,43 @@ chave ler_chave(chave codigo_item){
     return codigo_item;
 }
 
-void escolhe_alteracao(elemento *alterar_item){
+int menu(int opcao) {
+    printf("\nO que deseja fazer?\n\n");
+
+    printf("1 - Inserir novo item na lista.\n");
+    printf("2 - Pesquisar item da lista.\n");
+    printf("3 - Remover item da lista.\n");
+    printf("4 - Alterar item da lista.\n");
+    printf("5 - Imprimir lista.\n");
+    printf("6 - Sair.\n\n");
+
+    scanf("%d", &opcao);
+    return opcao;
+}
+
+static void imprimir_elemento(elemento item){
+    printf("\nCODIGO: %d\n", item.codigo);
+    printf("NOME: %s\n", item.nome);
+}
+
+static apontador pesquisa_posicao(lista *lista, chave codigo_item){
+
+    apontador pesquisa_pos = lista->head;
+
+    while (pesquisa_pos != NULL){
+
+        if(pesquisa_pos->item.codigo == codigo_item){
+            return pesquisa_pos;
+        }
+        else {
+            pesquisa_pos = pesquisa_pos->proximo;
+        }
+    }
+
+    return NULL;
+}
+
+static void escolhe_alteracao(elemento *alterar_item){
     int escolha=0;
 
     while(escolha != 1 && escolha != 2){
@@ -218,18 +248,4 @@ void escolhe_alteracao(elemento *alterar_item){
         }
     }
 
-}
-
-int menu(int opcao) {
-    printf("\nO que deseja fazer?\n\n");
-
-    printf("1 - Inserir novo item na lista.\n");
-    printf("2 - Pesquisar item da lista.\n");
-    printf("3 - Remover item da lista.\n");
-    printf("4 - Alterar item da lista.\n");
-    printf("5 - Imprimir lista.\n");
-    printf("6 - Sair.\n\n");
-
-    scanf("%d", &opcao);
-    return opcao;
 }

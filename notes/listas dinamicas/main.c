@@ -54,11 +54,13 @@ int main() {
             case 5: //imprimir lista
                 imprimir(&minhas_series);
                 break;
+
+            case 6:
+                liberar_lista(&minhas_series);
+                break;
             
             default:
-                if(opcao != 6){
-                    printf("Opcao invalida, tente novamente.\n\n");
-                }
+                printf("Opcao invalida, tente novamente.\n\n");
                 break;
         }
 

@@ -32,14 +32,15 @@
         int pesquisar(lista *lista, elemento *pesquisar_item);
         int alterar(lista *lista, elemento alterar_item);
         int cheia(lista *lista);
-
+        void liberar_lista(lista *lista);
         void imprimir(lista *lista);
-        void imprimir_elemento(elemento item);
 
-        apontador pesquisa_posicao(lista *lista, chave codigo_item);
         elemento ler_novo_item(elemento novo_item);
         chave ler_chave(chave codigo_item);
-        void escolhe_alteracao(elemento *alterar_item);
         int menu(int opcao);
+
+        static void imprimir_elemento(elemento item);
+        static apontador pesquisa_posicao(lista *lista, chave codigo_item);
+        static void escolhe_alteracao(elemento *alterar_item);
 
 #endif
