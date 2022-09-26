@@ -27,10 +27,10 @@
 
         int criar(lista *lista);
         int vazia(lista *lista);
-        int inserir(lista *lista, elemento item);
+        int inserir(lista *lista, elemento novo_item);
         int remover(lista *lista, chave codigo_item);
         int pesquisar(lista *lista, elemento *pesquisar_item);
-        int alterar(lista *lista, elemento novo_elemento);
+        int alterar(lista *lista, elemento alterar_item);
         int cheia(lista *lista);
 
         void imprimir(lista *lista);
@@ -39,6 +39,7 @@
         apontador pesquisa_posicao(lista *lista, chave codigo_item);
         elemento ler_novo_item(elemento novo_item);
         chave ler_chave(chave codigo_item);
+        void escolhe_alteracao(elemento *alterar_item);
         int menu(int opcao);
 
 #endif

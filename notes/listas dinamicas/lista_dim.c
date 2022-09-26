@@ -109,7 +109,29 @@ int pesquisar(lista *lista, elemento *pesquisar_item){
 
 }
 
-//int alterar(lista *lista, elemento novo_elemento);
+int alterar(lista *lista, elemento alterar_item){
+
+    if(vazia(lista)){
+        printf("Lista vazia.\n");
+        return ERRO_VAZIA;
+    }
+
+    apontador alterar_no = pesquisa_posicao(lista, alterar_item.codigo);
+
+    if(alterar_no == NULL){
+        printf("Esse item nao existe.\n");
+        return NAO_ENCONTROU;
+    }
+
+    strcpy(alterar_item.nome, alterar_no->item.nome);
+    escolhe_alteracao(&alterar_item);
+
+    alterar_no->item.codigo = alterar_item.codigo;
+    strcpy(alterar_no->item.nome, alterar_item.nome);
+    
+    return SUCESSO;
+
+}
 
 void imprimir(lista *lista){
 
@@ -167,13 +189,44 @@ chave ler_chave(chave codigo_item){
     return codigo_item;
 }
 
+void escolhe_alteracao(elemento *alterar_item){
+    int escolha=0;
+
+    while(escolha != 1 && escolha != 2){
+
+        printf("\nO que voce deseja alterar?\n");
+        printf("1 - Mudar codigo do item.\n");
+        printf("2 - Mudar nome do item.\n\n");
+        scanf("%d", &escolha);
+
+        switch (escolha){
+            case 1: //alterar codigo
+                printf("Novo codigo: ");
+                scanf("%d", &alterar_item->codigo); 
+
+                break;
+            
+            case 2: //alterar nome
+                printf("Novo nome: ");
+                scanf("%s", alterar_item->nome);
+
+                break;
+            
+            default:
+                printf("Opcao invalida.\n");
+                break;
+        }
+    }
+
+}
+
 int menu(int opcao) {
     printf("\nO que deseja fazer?\n\n");
 
     printf("1 - Inserir novo item na lista.\n");
     printf("2 - Pesquisar item da lista.\n");
     printf("3 - Remover item da lista.\n");
-    //printf("4 - Alterar item da lista.\n");
+    printf("4 - Alterar item da lista.\n");
     printf("5 - Imprimir lista.\n");
     printf("6 - Sair.\n\n");
 

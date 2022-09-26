@@ -41,6 +41,16 @@ int main() {
                 }
                 break;
 
+            case 4: //alterar
+                printf("ALTERAR ITEM DA LISTA\n");
+                serie.codigo = ler_chave(serie.codigo);
+
+                if (alterar(&minhas_series, serie) == SUCESSO){
+                    imprimir(&minhas_series);
+                }
+
+                break;
+
             case 5: //imprimir lista
                 imprimir(&minhas_series);
                 break;
