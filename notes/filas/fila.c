@@ -31,7 +31,26 @@ int enfileirar(fila *fila, elemento item){
 
 }
 
-int desenfileirar(fila *fila);
+int desenfileirar(fila *fila){
+
+    if(vazia(fila)){
+        printf("Fila vazia.\n");
+        return ERRO_VAZIA;
+    }
+
+    apontador remover = fila->primeiro;
+    printf("%s saiu da fila.\n", remover->item_fila.nome);
+
+    if(remover == fila->ultimo){
+        free(remover);
+        criar(fila);
+        return SUCESSO;
+    }
+
+    fila->primeiro = fila->primeiro->proximo;
+    free(remover);
+    return SUCESSO;
+}
 int item_inicio(fila *fila);
 
 int vazia(fila *fila){
@@ -82,7 +101,7 @@ void liberar_fila(fila *fila){
 int menu(int opcao){
     printf("\nO que voce deseja fazer?\n");
     printf("\n1 - Inserir pessoa na fila\n");
-    //printf("2 - Tirar pessoa da fila\n");
+    printf("2 - Tirar pessoa da fila\n");
     //printf("3 - Saber quem eh o primeiro da fila\n");
     //printf("4 - Saber quantas pessoas estao na fila\n");
     printf("5 - Imprimir toda a fila\n");

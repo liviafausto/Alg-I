@@ -21,6 +21,12 @@ int main() {
 
                 break;
             
+            case 2:
+                if(desenfileirar(&supermercado) == SUCESSO){
+                    imprimir(&supermercado);
+                }
+
+                break;
             case 5:
                 imprimir(&supermercado);
                 
