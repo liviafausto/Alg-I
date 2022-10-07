@@ -13,7 +13,7 @@
     typedef char marcador;
 
     typedef struct{
-        nome contato[MAX_NOME];
+        nome nome_pessoa[MAX_NOME];
         char num_telefone[MAX_TELEFONE];
     } elemento;
 
