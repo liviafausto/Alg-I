@@ -27,7 +27,8 @@ int main() {
                 break;
             
             case 6:
-
+                liberar_fila(&supermercado);
+                
                 break;
             
             default:

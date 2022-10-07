@@ -63,6 +63,22 @@ void imprimir(fila *fila){
 
 }
 
+void liberar_fila(fila *fila){
+
+    if(vazia(fila)){
+        return;
+    }
+
+    apontador libera_no = fila->primeiro;
+
+    while(libera_no != NULL){
+
+        fila->primeiro = fila->primeiro->proximo;
+        free(libera_no);
+        libera_no = fila->primeiro;
+    }
+}
+
 int menu(int opcao){
     printf("\nO que voce deseja fazer?\n");
     printf("\n1 - Inserir pessoa na fila\n");

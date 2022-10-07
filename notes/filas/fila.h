@@ -33,6 +33,7 @@
         int vazia(fila *fila);
         int contar(fila *fila);
         void imprimir(fila *fila);
+        void liberar_fila(fila *fila);
 
         int menu(int opcao);
         elemento ler_item(elemento item);
