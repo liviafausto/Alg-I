@@ -3,11 +3,11 @@
 #include "fila.h"
 
 int main() {
-    fila supermercado; elemento pessoa; int opcao=0;
+    fila supermercado; elemento pessoa; int contador, opcao=0;
 
     criar(&supermercado);
 
-    while(opcao != 6){
+    while(opcao != 5){
         opcao = menu(opcao);
 
         switch(opcao){
@@ -18,21 +18,33 @@ int main() {
                 if(enfileirar(&supermercado, pessoa) == SUCESSO){
                     printf("%s agora esta esperando na fila.\n", pessoa.nome);
                 }
-
                 break;
             
             case 2:
                 if(desenfileirar(&supermercado) == SUCESSO){
                     imprimir(&supermercado);
                 }
+                break;
+
+            case 3:
+                if(vazia(&supermercado)){
+                    printf("Fila vazia.\n");
+                } else {
+                    pessoa = item_inicio(&supermercado);
+                    printf("A primeira pessoa da fila eh: %d - %s\n", pessoa.num, pessoa.nome);
+                }
 
                 break;
-            case 5:
-                imprimir(&supermercado);
+
+            case 4:
+                contador = contar(&supermercado);
                 
+                if(contador >= 0){
+                    printf("Existem %d pessoas na fila.\n", contador);
+                }
                 break;
             
-            case 6:
+            case 5:
                 liberar_fila(&supermercado);
                 
                 break;

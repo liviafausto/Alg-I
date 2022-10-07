@@ -51,7 +51,12 @@ int desenfileirar(fila *fila){
     free(remover);
     return SUCESSO;
 }
-int item_inicio(fila *fila);
+
+elemento item_inicio(fila *fila){
+
+    return fila->primeiro->item_fila;
+
+}
 
 int vazia(fila *fila){
 
@@ -62,7 +67,22 @@ int vazia(fila *fila){
     }
 }
 
-int contar(fila *fila);
+int contar(fila *fila){
+
+    if(vazia(fila)){
+        printf("Fila vazia.\n");
+        return ERRO_VAZIA;
+    }
+
+    apontador percorre = fila->primeiro; int contador=0;
+
+    while(percorre != NULL){
+        contador++;
+        percorre = percorre->proximo;
+    }
+
+    return contador;
+}
 
 void imprimir(fila *fila){
 
@@ -102,10 +122,9 @@ int menu(int opcao){
     printf("\nO que voce deseja fazer?\n");
     printf("\n1 - Inserir pessoa na fila\n");
     printf("2 - Tirar pessoa da fila\n");
-    //printf("3 - Saber quem eh o primeiro da fila\n");
-    //printf("4 - Saber quantas pessoas estao na fila\n");
-    printf("5 - Imprimir toda a fila\n");
-    printf("6 - Sair\n\n");
+    printf("3 - Saber quem eh o primeiro da fila\n");
+    printf("4 - Saber quantas pessoas estao na fila\n");
+    printf("5 - Sair\n\n");
 
     scanf("%d", &opcao);
     return opcao;

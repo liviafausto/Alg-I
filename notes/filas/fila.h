@@ -29,7 +29,7 @@
         int criar(fila *nova_fila);
         int enfileirar(fila *fila, elemento item);
         int desenfileirar(fila *fila);
-        int item_inicio(fila *fila);
+        elemento item_inicio(fila *fila);
         int vazia(fila *fila);
         int contar(fila *fila);
         void imprimir(fila *fila);
