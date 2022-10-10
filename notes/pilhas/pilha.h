@@ -27,7 +27,7 @@
 
         int criar(pilha *p);
         int vazia(pilha *p);
-        int cheia(pilha *p);
+        int cheia(apontador item);
 
         int push(pilha *p, elemento item); //empilhar
         int pop(pilha *p); //desempilhar
