@@ -25,6 +25,19 @@ int cheia(apontador item){
     }
 }
 
+static int pesquisa_codigo(pilha *p, chave codigo){
+    apontador pesquisa = p->topo;
+
+    while(pesquisa != NULL){
+        if(pesquisa->item.codigo == codigo){
+            return 1;
+        }
+        pesquisa = pesquisa->proximo;
+    }
+
+    return 0;
+}
+
 int push(pilha *p, elemento item){
     apontador novo = (apontador) malloc(sizeof(no));
 
@@ -32,7 +45,11 @@ int push(pilha *p, elemento item){
         printf("Pilha cheia.\n");
         return ERRO_CHEIA;
     }
-    //if (item.codigo ja existe)
+    
+    if(pesquisa_codigo(p, item.codigo)){
+        printf("Ja existe um item com esse codigo.\n");
+        return JA_EXISTE;
+    }
 
     novo->item = item;
 
