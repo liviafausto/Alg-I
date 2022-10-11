@@ -87,7 +87,18 @@ no topo(pilha *p){
 int contar(pilha *p){
     return numero_nos;
 }
-//inverte(pilha *p);
+
+pilha inverte(pilha *p){
+    pilha invertida; criar(&invertida);
+    apontador copia = p->topo;
+
+    while(copia != NULL){
+        push(&invertida, copia->item);
+        copia = copia->proximo;
+    }
+
+    return invertida;
+}
 
 void imprime(pilha *p){
     if(vazia(p)){
@@ -111,7 +122,8 @@ void menu(int *opcao){
     printf("3 - Saber qual a ultima pagina pesquisada\n");
     printf("4 - Saber quantas paginas estao no historico\n");
     printf("5 - Ver historico completo\n");
-    printf("6 - Sair.\n\n");
+    printf("6 - Inverter historico\n");
+    printf("7 - Sair.\n\n");
 
     scanf("%d", opcao);
 }

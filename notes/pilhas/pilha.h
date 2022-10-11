@@ -33,16 +33,10 @@
         int pop(pilha *p); //desempilhar
         no topo(pilha *p);
         int contar(pilha *p);
-        //inverte(pilha *p);
+        pilha inverte(pilha *p);
 
         void imprime(pilha *p);
         void menu(int *opcao);
         void ler_elemento(elemento *item);
         void libera(pilha *p);
 #endif
-
-/*
-especialização de lista
-inserções e remoções sao feitas no topo
-last-in / first-out (LIFO)
-*/

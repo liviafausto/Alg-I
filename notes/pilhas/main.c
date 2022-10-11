@@ -2,10 +2,10 @@
 #include "pilha.h"
 
 int main() {
-    pilha historico; elemento pagina; int opcao=0;
-    criar(&historico);
+    pilha historico; criar(&historico);
+    elemento pagina; int opcao=0;
 
-    while(opcao!=6){
+    while(opcao!=7){
         menu(&opcao);
 
         switch (opcao){
@@ -43,6 +43,13 @@ int main() {
             break;
 
         case 6:
+            if(!vazia(&historico)){
+                historico = inverte(&historico);
+                imprime(&historico);
+            }
+            break;
+
+        case 7:
             if(!vazia(&historico)){
                 libera(&historico);
             }
