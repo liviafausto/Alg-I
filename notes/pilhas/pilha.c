@@ -50,10 +50,15 @@ int pop(pilha *p){
     }
 
     apontador remover = p->topo;
-    p->topo = p->topo->proximo;
 
-    free(remover);
-    numero_nos--;
+    if(p->topo->proximo == NULL){
+        free(remover);
+        criar(p);
+    } else {
+        p->topo = p->topo->proximo;
+        free(remover);
+        numero_nos--;
+    }
 
     return SUCESSO;
 }
@@ -70,12 +75,13 @@ int contar(pilha *p){
 void imprime(pilha *p){
     if(vazia(p)){
         printf("Pilha vazia.\n");
+        return;
     }
 
     apontador imprime = p->topo;
 
+    printf("\nHistorico de Navegacao:\n");
     while(imprime != NULL){
-        printf("\nHistorico de Navegacao:\n");
         printf("%d - %s\n", imprime->item.codigo, imprime->item.nome);
         imprime = imprime->proximo;
     }

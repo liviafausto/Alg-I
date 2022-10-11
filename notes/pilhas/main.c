@@ -17,23 +17,25 @@ int main() {
             break;
         
         case 2:
-            pagina = topo(&historico).item;
             if(pop(&historico) == SUCESSO){
-                printf("A pagina %s foi removida do historico\n", pagina.nome);
+                printf("A ultima pagina pesquisada foi removida do historico.\n");
             }
             break;
 
         case 3:
-            pagina = topo(&historico).item;
-            if(!vazia(&historico)){
-                printf("A pagina %s foi a ultima a ser pesquisada\n", pagina.nome);
+            if(vazia(&historico)){
+                printf("Pilha vazia.\n");
+                break;
             }
+
+            pagina = topo(&historico).item;
+            printf("A pagina %s foi a ultima a ser pesquisada\n", pagina.nome);
+
             break;
 
         case 4:
-            if(!vazia(&historico)){
-                printf("Existem %d paginas no historico.\n", contar(&historico));
-            }
+            printf("Existem %d paginas no historico.\n", contar(&historico));
+            
             break;
 
         case 5:
@@ -41,7 +43,9 @@ int main() {
             break;
 
         case 6:
-            libera(&historico);
+            if(!vazia(&historico)){
+                libera(&historico);
+            }
             break;
 
         default:
