@@ -36,7 +36,9 @@
         //inverte(pilha *p);
 
         void imprime(pilha *p);
-
+        void menu(int *opcao);
+        void ler_elemento(elemento *item);
+        void libera(pilha *p);
 #endif
 
 /*

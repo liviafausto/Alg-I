@@ -51,3 +51,15 @@ int contar(pilha *p){
 //inverte(pilha *p);
 
 void imprime(pilha *p);
+
+void menu(int *opcao){
+    printf("\nO que voce deseja fazer?\n");
+    printf("1 - Adicionar pagina no historico\n");
+    printf("2 - Remover pagina do historico\n");
+    printf("3 - Saber qual a ultima pagina pesquisada\n");
+    printf("4 - Saber quantas paginas estao no historico\n");
+    printf("5 - Ver historico completo\n");
+    printf("6 - Sair.\n");
+
+    scanf("%d", opcao);
+}
