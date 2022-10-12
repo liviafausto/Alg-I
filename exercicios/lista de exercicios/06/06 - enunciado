@@ -1,0 +1,2 @@
+Escreva uma função que rearranja os elementos de uma lista dada de forma que os elementos em posições pares sejam colocados antes de todos os elementos de posições ímpares. 
+Preserve a ordem dos elementos pares entre si, e a ordem dos elementos ímpares entre si.
