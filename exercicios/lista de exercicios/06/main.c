@@ -5,25 +5,18 @@ int main() {
     lista numeros; criar(&numeros);
     elemento item;
 
-    item.codigo = 1; item.paridade = 'i';
-    inserir(&numeros, item);
-
-    item.codigo = 2; item.paridade = 'p';
-    inserir(&numeros, item);
-
-    item.codigo = 3; item.paridade = 'i';
-    inserir(&numeros, item);
-
-    item.codigo = 4; item.paridade = 'p';
-    inserir(&numeros, item);
-
-    item.codigo = 5; item.paridade = 'i';
-    inserir(&numeros, item);
-
-    item.codigo = 6; item.paridade = 'p';
-    inserir(&numeros, item);
+    printf("Insira os 7 numeros da lista.\n\n");
+    
+    for(int i=0; i<7; i++){
+        printf("Numero: "); scanf("%d", &item.codigo);
+        inserir(&numeros, item);
+    }
 
     printf("Lista original:\n");
+    imprimir(&numeros);
+
+    printf("Lista com elementos de posicoes pares antes dos impares:\n");
+    rearranjar(&numeros);
     imprimir(&numeros);
 
     liberar(&numeros);
