@@ -1,56 +1,100 @@
 #include "arvore.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 int criar(arvore *arvore){
     arvore->raiz = NULL;
 }
 
-int static criar_raiz(arvore *arvore, elemento folha){
+int vazia(arvore *arvore){
+    if(arvore->raiz == NULL){
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+apontador static criar_folha(arvore *arvore, elemento folha){
 
     apontador novo = (apontador) malloc(sizeof(no));
     if(novo == NULL){
-        return ERRO_CHEIA;
+        printf("Nao ha memoria disponivel para criar uma nova folha\n");
+        return NULL;
     }
 
     novo->direita = NULL;
     novo->esquerda = NULL;
-    novo->folha = folha;
+    novo->folha = folha; printf("folha adicionada: %d\n", novo->folha.codigo);
+    return novo;
 
-    arvore->raiz = novo;
-    
-    return SUCESSO;
 }
 
 int inserir(arvore *arvore, elemento nova_folha){
 
-    //caso a arvore esteja vazia
-    if(arvore->raiz == NULL){
-        return criar_raiz(arvore, nova_folha);
-    }
-
-    //caso o codigo da raiz seja igual ao novo codigo
-    if(arvore->raiz->folha.codigo == nova_folha.codigo){
+    if(pesquisar(arvore, nova_folha.codigo) != NULL){
+        printf("Ja existe uma folha com esse codigo\n");
         return JA_EXISTE;
     }
 
+    apontador novo = criar_folha(arvore, nova_folha);
+    if(novo == NULL){
+        return ERRO_CHEIA;
+    }
 
+    if(vazia(arvore)){
+        arvore->raiz = novo;
+        printf("Raiz da arvore criada: %d\n", arvore->raiz->folha.codigo);
+        return SUCESSO;
+    }
 
+    apontador inserir_pos = arvore->raiz;
+
+    while(inserir_pos != NULL){
+
+        if(novo->folha.codigo < inserir_pos->folha.codigo){
+
+            if(inserir_pos->esquerda == NULL){
+                inserir_pos->esquerda = novo; 
+                printf("FOLHA: %d <- %d\n", inserir_pos->esquerda->folha.codigo, inserir_pos->folha.codigo);
+                break;
+            } else {
+                inserir_pos = inserir_pos->esquerda;
+            }
+        }
+        else if(novo->folha.codigo > inserir_pos->folha.codigo){
+
+            if(inserir_pos->direita == NULL){
+                inserir_pos->direita = novo;
+                printf("FOLHA: %d -> %d\n", inserir_pos->folha.codigo, inserir_pos->direita->folha.codigo);
+                break;
+            } else {
+                inserir_pos = inserir_pos->direita;
+            }
+        }
+
+    }
+    
     return SUCESSO;
 }
 
-elemento pesquisar(arvore *arvore, chave codigo){
-    apontador posicao;
+apontador pesquisar(arvore *arvore, chave codigo){
+    apontador posicao = arvore->raiz;
 
-    //menor vai para a esquerda e maior vai para a direita
-    if(arvore->raiz->folha.codigo > codigo){
-        posicao = pesquisar_esquerda(arvore, codigo);
+    while(posicao != NULL){
+
+        if(codigo == posicao->folha.codigo){
+            return posicao;
+        }
+
+        if(codigo < posicao->folha.codigo){
+            //codigo eh menor, vai para a esquerda
+            posicao = posicao->esquerda;
+        }
+        else if(codigo > posicao->folha.codigo){
+            //codigo eh maior, vai para a direita
+            posicao = posicao->direita;
+        }
     }
 
-    if(arvore->raiz->folha.codigo < codigo){
-        posicao = pesquisar_direita(arvore, codigo);
-    }
-
+    return posicao;
 }
-
-apontador pesquisar_direita(arvore *arvore, chave codigo);
-apontador pesquisar_esquerda(arvore *arvore, chave codigo);

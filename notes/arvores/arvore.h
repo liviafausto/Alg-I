@@ -11,7 +11,6 @@
 
         typedef struct elemento{
             chave codigo;
-            char nome[50];
         } elemento;
 
         typedef struct no *apontador;
@@ -26,8 +25,8 @@
         } arvore;
 
         int criar(arvore *arvore);
+        int vazia(arvore *arvore);
         int inserir(arvore *arvore, elemento nova_folha);
-        apontador pesquisar_direita(arvore *arvore, chave codigo);
-        apontador pesquisar_esquerda(arvore *arvore, chave codigo);
+        apontador pesquisar(arvore *arvore, chave codigo);
 
 #endif
