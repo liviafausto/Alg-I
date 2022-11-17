@@ -58,6 +58,23 @@ elemento pesquisar(arvore *abb, chave codigo){
 
 }
 
+static void buscaMaiorEsquerda(arvore *raiz, arvore *subarvore){
+
+    if((*subarvore)->direita == NULL){
+
+        (*raiz)->folha = (*subarvore)->folha;
+
+        apontador troca_folha = *subarvore;
+
+        *subarvore = (*subarvore)->esquerda;
+
+        free(troca_folha);
+    }
+    else {
+        buscaMaiorEsquerda(raiz, &(*subarvore)->direita);
+    }
+}
+
 int remover(arvore *abb, chave codigo){
     if(*abb == NULL){
         return NAO_ENCONTROU;
@@ -66,26 +83,30 @@ int remover(arvore *abb, chave codigo){
     //busca: direita ou esquerda
     if(codigo > (*abb)->folha.codigo){
         return remover(&(*abb)->direita, codigo);
-    } else if(codigo < (*abb)->folha.codigo){
+    } 
+    else if(codigo < (*abb)->folha.codigo){
         return remover(&(*abb)->esquerda, codigo);
     }
 
-    apontador remove_folha = *abb;
     //se passou, é porque achou a chave
+    apontador remove_folha = *abb;
 
-    if((*abb)->esquerda == NULL && (*abb)->direita == NULL){ 
-        //caso 1: folha
+    if((*abb)->esquerda == NULL && (*abb)->direita == NULL){ //caso 1: não há folhas na direita ou esquerda
         *abb = NULL;
-        free(abb);
-    } else if((*abb)->esquerda == NULL){
-        //caso 2: direita
+        free(remove_folha);
+    } 
+    else if((*abb)->esquerda == NULL){ //caso 2: há uma folha na direita
         *abb = (*abb)->direita;
         free(abb);
     }
-    
-}
+    else if((*abb)->direita == NULL){ //caso 3: há uma folha na esquerda
+        *abb = ((*abb)->esquerda);
+        free(remove_folha);
+    }
+    else{ //caso 4: há folhas nas duas direções
+        buscaMaiorEsquerda(abb, &(*abb)->esquerda);
+    }
 
-void imprimir_arvore(arvore *abb){
-    //nao da para percorrer em apenas uma passagem
-    //depende do tamanho da arvore e da quantidade de niveis
+    return SUCESSO;
+    
 }
