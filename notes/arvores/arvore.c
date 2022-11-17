@@ -40,7 +40,6 @@ int inserir(arvore *abb, elemento nova_folha){
 elemento pesquisar(arvore *abb, chave codigo){
     if(*abb == NULL){
         elemento e;
-        printf("Nao foi possivel encontrar essa folha.\n");
         e.codigo = NAO_ENCONTROU;
         return e;
     }
@@ -64,11 +63,11 @@ static void buscaMaiorEsquerda(arvore *raiz, arvore *subarvore){
 
         (*raiz)->folha = (*subarvore)->folha;
 
-        apontador troca_folha = *subarvore;
+        apontador remove_folha = *subarvore;
 
         *subarvore = (*subarvore)->esquerda;
 
-        free(troca_folha);
+        free(remove_folha);
     }
     else {
         buscaMaiorEsquerda(raiz, &(*subarvore)->direita);
@@ -97,7 +96,7 @@ int remover(arvore *abb, chave codigo){
     } 
     else if((*abb)->esquerda == NULL){ //caso 2: há uma folha na direita
         *abb = (*abb)->direita;
-        free(abb);
+        free(remove_folha);
     }
     else if((*abb)->direita == NULL){ //caso 3: há uma folha na esquerda
         *abb = ((*abb)->esquerda);

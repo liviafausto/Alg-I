@@ -26,5 +26,26 @@ int main() {
     folha.codigo = 14;
     inserir(&arvore_binaria, folha);
 
+    folha = pesquisar(&arvore_binaria, 6);
+
+    if(folha.codigo < 0){
+        printf("Nao foi possivel encontrar essa folha.\n");
+    } else {
+        printf("Codigo encontrado: %d\n", folha.codigo);
+    }
+
+    if(remover(&arvore_binaria, 10) == SUCESSO){
+        printf("10 removido com sucesso.\n");
+    }
+
+    if(remover(&arvore_binaria, 12) == SUCESSO){
+        printf("12 removido com sucesso.\n");
+    }
+    
+    if(remover(&arvore_binaria, 4) == SUCESSO){
+        printf("4 removido com sucesso.\n");
+    }
+
+
     return 0;
 }
