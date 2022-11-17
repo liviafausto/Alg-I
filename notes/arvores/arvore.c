@@ -2,99 +2,90 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int criar(arvore *arvore){
-    arvore->raiz = NULL;
+int criar(arvore *abb){
+    *abb = NULL;
 }
 
-int vazia(arvore *arvore){
-    if(arvore->raiz == NULL){
-        return 1;
-    } else {
-        return 0;
-    }
-}
-
-apontador static criar_folha(arvore *arvore, elemento folha){
-
-    apontador novo = (apontador) malloc(sizeof(no));
-    if(novo == NULL){
-        printf("Nao ha memoria disponivel para criar uma nova folha\n");
-        return NULL;
-    }
-
-    novo->direita = NULL;
-    novo->esquerda = NULL;
-    novo->folha = folha; printf("folha adicionada: %d\n", novo->folha.codigo);
-    return novo;
-
-}
-
-int inserir(arvore *arvore, elemento nova_folha){
-
-    if(pesquisar(arvore, nova_folha.codigo) != NULL){
-        printf("Ja existe uma folha com esse codigo\n");
-        return JA_EXISTE;
-    }
-
-    apontador novo = criar_folha(arvore, nova_folha);
-    if(novo == NULL){
+int static criar_raiz(arvore *abb, elemento folha){
+    *abb = (arvore) malloc(sizeof(no));
+    if(*abb == NULL){
         return ERRO_CHEIA;
     }
 
-    if(vazia(arvore)){
-        arvore->raiz = novo;
-        printf("Raiz da arvore criada: %d\n", arvore->raiz->folha.codigo);
-        return SUCESSO;
-    }
+    (*abb)->esquerda = NULL;
+    (*abb)->direita = NULL;
+    (*abb)->folha = folha;
 
-    apontador inserir_pos = arvore->raiz;
-
-    while(inserir_pos != NULL){
-
-        if(novo->folha.codigo < inserir_pos->folha.codigo){
-
-            if(inserir_pos->esquerda == NULL){
-                inserir_pos->esquerda = novo; 
-                printf("FOLHA: %d <- %d\n", inserir_pos->esquerda->folha.codigo, inserir_pos->folha.codigo);
-                break;
-            } else {
-                inserir_pos = inserir_pos->esquerda;
-            }
-        }
-        else if(novo->folha.codigo > inserir_pos->folha.codigo){
-
-            if(inserir_pos->direita == NULL){
-                inserir_pos->direita = novo;
-                printf("FOLHA: %d -> %d\n", inserir_pos->folha.codigo, inserir_pos->direita->folha.codigo);
-                break;
-            } else {
-                inserir_pos = inserir_pos->direita;
-            }
-        }
-
-    }
-    
     return SUCESSO;
 }
 
-apontador pesquisar(arvore *arvore, chave codigo){
-    apontador posicao = arvore->raiz;
-
-    while(posicao != NULL){
-
-        if(codigo == posicao->folha.codigo){
-            return posicao;
-        }
-
-        if(codigo < posicao->folha.codigo){
-            //codigo eh menor, vai para a esquerda
-            posicao = posicao->esquerda;
-        }
-        else if(codigo > posicao->folha.codigo){
-            //codigo eh maior, vai para a direita
-            posicao = posicao->direita;
-        }
+int inserir(arvore *abb, elemento nova_folha){
+    if(*abb == NULL){
+        return criar_raiz(abb, nova_folha); 
     }
 
-    return posicao;
+    //considerar chaves primárias
+    if (nova_folha.codigo == (*abb)->folha.codigo){
+        return JA_EXISTE;
+    }
+
+    if(nova_folha.codigo < (*abb)->folha.codigo){
+        return inserir(&(*abb)->esquerda, nova_folha);
+    } else {
+        return inserir(&(*abb)->direita, nova_folha);
+    }
+
+}
+
+elemento pesquisar(arvore *abb, chave codigo){
+    if(*abb == NULL){
+        elemento e;
+        printf("Nao foi possivel encontrar essa folha.\n");
+        e.codigo = NAO_ENCONTROU;
+        return e;
+    }
+
+    if(codigo  == (*abb)->folha.codigo){
+        printf("A folha foi encontrada.\n");
+        return (*abb)->folha;
+    }
+
+    if(codigo < (*abb)->folha.codigo){
+        return pesquisar(&(*abb)->esquerda, codigo);
+    } else {
+        return pesquisar(&(*abb)->direita, codigo);
+    }
+
+}
+
+int remover(arvore *abb, chave codigo){
+    if(*abb == NULL){
+        return NAO_ENCONTROU;
+    }
+
+    //busca: direita ou esquerda
+    if(codigo > (*abb)->folha.codigo){
+        return remover(&(*abb)->direita, codigo);
+    } else if(codigo < (*abb)->folha.codigo){
+        return remover(&(*abb)->esquerda, codigo);
+    }
+
+    apontador remove_folha = *abb;
+    //se passou, é porque achou a chave
+
+    if((*abb)->esquerda == NULL && (*abb)->direita == NULL){ 
+        //caso 1: folha
+        *abb = NULL;
+        free(abb);
+    } else if((*abb)->esquerda == NULL){
+        //caso 2: direita
+        *abb = (*abb)->direita;
+        free(abb);
+    }
+    
+}
+
+void imprimir_arvore(arvore *abb){
+    //nao da para percorrer em apenas uma passagem
+    //depende do tamanho da arvore e da quantidade de niveis
 }

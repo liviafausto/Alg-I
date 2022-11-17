@@ -20,13 +20,12 @@
             apontador direita;
         } no;
 
-        typedef struct{
-            apontador raiz;
-        } arvore;
+        typedef apontador arvore;
 
-        int criar(arvore *arvore);
-        int vazia(arvore *arvore);
-        int inserir(arvore *arvore, elemento nova_folha);
-        apontador pesquisar(arvore *arvore, chave codigo);
+        int criar(arvore *abb);
+        int inserir(arvore *abb, elemento nova_folha);
+        elemento pesquisar(arvore *abb, chave codigo);
+        int remover(arvore *abb, chave codigo);
+        //int vazia(arvore *abb);
 
 #endif
