@@ -2,8 +2,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//abb = Árvore Binária de Busca
+
 int criar(arvore *abb){
     *abb = NULL;
+}
+
+int vazia(arvore *abb){
+    if(*abb == NULL){
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
 int static criar_raiz(arvore *abb, elemento folha){
@@ -108,4 +118,36 @@ int remover(arvore *abb, chave codigo){
 
     return SUCESSO;
     
+}
+
+void visita(arvore *abb){
+    //visitar pode significar qualquer tipo de operação feita no nó
+    printf("%d ", (*abb)->folha.codigo);
+}
+
+void pre_order(arvore *abb){
+    //visita o nó antes de acessar qualquer um de seus filhos
+    if(*abb != NULL){
+        visita(abb);
+        pre_order(&(*abb)->esquerda);
+        pre_order(&(*abb)->direita);
+    }
+}
+
+void in_order(arvore *abb){
+    //visita o nó entre o acesso a cada um de seus dois filhos
+    if(*abb != NULL){
+        in_order(&(*abb)->esquerda);
+        visita(abb);
+        in_order(&(*abb)->direita);
+    }
+}
+
+void pos_order(arvore *abb){
+    //visita o nó somente depois de acessar seus filhos
+    if(*abb != NULL){
+        pos_order(&(*abb)->esquerda);
+        pos_order(&(*abb)->direita);
+        visita(abb);
+    }
 }

@@ -23,9 +23,13 @@
         typedef apontador arvore;
 
         int criar(arvore *abb);
+        int vazia(arvore *abb);
         int inserir(arvore *abb, elemento nova_folha);
         elemento pesquisar(arvore *abb, chave codigo);
         int remover(arvore *abb, chave codigo);
-        //int vazia(arvore *abb);
+        void visita(arvore *abb);
+        void pre_order(arvore *abb);
+        void in_order(arvore *abb);
+        void pos_order(arvore *abb);
 
 #endif

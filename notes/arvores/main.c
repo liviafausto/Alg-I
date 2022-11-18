@@ -26,6 +26,9 @@ int main() {
     folha.codigo = 14;
     inserir(&arvore_binaria, folha);
 
+    pre_order(&arvore_binaria);
+    printf("\n");
+
     folha = pesquisar(&arvore_binaria, 6);
 
     if(folha.codigo < 0){
@@ -46,6 +49,8 @@ int main() {
         printf("4 removido com sucesso.\n");
     }
 
+    pre_order(&arvore_binaria);
+    printf("\n");
 
     return 0;
 }
