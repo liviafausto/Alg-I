@@ -1,38 +1,13 @@
 #include "avl.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 //A eficiência das operações numa ABB depende da profundidade dos nós folha
 //Tal profundidade depende do seu balanceamento
-//AVL: nome vem dos seus criadores - Adelson-Velsky e Landis
 
 static int max(int a, int b);
 static void rotacao_esquerda(arvore *avl);
-
-
-int retornar_altura(arvore *avl){
-    if((*avl) == NULL){
-        return -1;
-    } else {
-        return (*avl)->altura;
-    }
-}
-
-int checar_fatorBalanceamento(arvore *avl){
-    if((*avl) == NULL){
-        return 0;
-    } else {
-        int Fb;
-        Fb = retornar_altura(&(*avl)->esq) - retornar_altura(&(*avl)->dir);
-        return Fb;
-    }
-}
-
-int criar(arvore *avl){
-    //ideal seria limpar caso houvesse algo
-    *avl = NULL;
-}
+static void rotacao_direita(arvore *avl);
 
 int vazia(arvore *avl){
     if(*avl == NULL){
@@ -40,6 +15,11 @@ int vazia(arvore *avl){
     } else {
         return 0;
     }
+}
+
+int criar(arvore *avl){
+    apagar(avl);
+    *avl = NULL;
 }
 
 int static criar_raiz(arvore *avl, elemento folha){
@@ -51,6 +31,7 @@ int static criar_raiz(arvore *avl, elemento folha){
     (*avl)->esq = NULL;
     (*avl)->dir = NULL;
     (*avl)->folha = folha;
+    (*avl)->altura = 0;
 
     return SUCESSO;
 }
@@ -60,11 +41,22 @@ int inserir(arvore *avl, elemento folha){
         return criar_raiz(avl, folha);
     }
 
-    //considerar se os nomes são iguais
-    if(strcmp(folha.nome, (*avl)->folha.nome) == 0){
+    if(folha.codigo == (*avl)->folha.codigo){
         return JA_EXISTE;
     }
 
+    if(folha.codigo < (*avl)->folha.codigo){
+        inserir(&(*avl)->esq, folha);
+        (*avl)->altura = max((*avl)->altura, retornar_altura(&(*avl)->esq + 1));
+    } else {
+        return inserir(&(*avl)->dir, folha);
+        (*avl)->altura = max((*avl)->altura, retornar_altura(&(*avl)->dir + 1));
+    }
+
+    int Fb = fatorBalanceamento(avl);
+    if(Fb > 1){
+        
+    }
     
 }
 
@@ -72,13 +64,41 @@ elemento pesquisar(arvore *avl, chave nome);
 
 int remover(arvore *avl, chave nome);
 
-void imprimir(arvore *abb){
-
+void imprimir(arvore *avl){
+    if((*avl) != NULL){
+        printf("%d ", (*avl)->folha.codigo);
+        imprimir(&(*avl)->esq);
+        imprimir(&(*avl)->dir);
+    }
 }
 
-void in_order(arvore *abb){
-
+void apagar(arvore *avl){
+    if((*avl) != NULL){
+        apagar(&(*avl)->esq);
+        apagar(&(*avl)->dir);
+        free(avl);
+    }
 }
+
+int retornar_altura(arvore *avl){
+    if((*avl) == NULL){
+        return -1;
+    } else {
+        return (*avl)->altura;
+    }
+}
+
+int fatorBalanceamento(arvore *avl){
+    if((*avl) == NULL){
+        return 0;
+    } else {
+        int Fb;
+        Fb = retornar_altura(&(*avl)->esq) - retornar_altura(&(*avl)->dir);
+        return Fb;
+    }
+}
+
+//----------------------------------------------
 
 static int max(int a, int b){
     if(a > b){

@@ -7,12 +7,10 @@
         #define ERRO_CHEIA 0
         #define SUCESSO 1
 
-        typedef char chave[11];
-        typedef char numero[10];
+        typedef int chave;
 
         typedef struct {
-            chave nome;
-            numero telefone;
+            chave codigo;
         } elemento;
 
         typedef struct no *apontador;
@@ -30,10 +28,10 @@
         int inserir(arvore *avl, elemento folha);
         elemento pesquisar(arvore *avl, chave nome);
         int remover(arvore *avl, chave nome);
-        void imprimir(arvore *abb);
-        void in_order(arvore *abb);
+        void imprimir(arvore *avl);
+        void apagar(arvore *avl);
 
         int retornar_altura(arvore *avl);
-        int checar_fatorBalanceamento(arvore *avl);
+        int fatorBalanceamento(arvore *avl);
 
 #endif
